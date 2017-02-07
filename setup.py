@@ -29,11 +29,11 @@ test_requirements = [
 setup(
     name='ckan_loaddata',
     version='0.1.0',
-    description="A standalone package for loading data intN from remote sources",
+    description="A utility for loading data into CKAN from remote sources",
     long_description=readme + '\n\n' + history,
     author="Tanzania Open Data Initiative",
-    author_email='aroy@alum.mit.edu',
-    url='https://github.com/ /ckan_loaddata',
+    author_email='',
+    url='https://github.com/WorldBank-Transport/ckan-loaddata',
     packages=[
         'ckan_loaddata',
     ],
@@ -41,7 +41,7 @@ setup(
                  'ckan_loaddata'},
     entry_points={
         'console_scripts': [
-            'ckan_loaddata=ckan_loaddata.cli:main'
+            'ckan_loaddata=ckan_loaddata.cli:loaddata'
         ]
     },
     include_package_data=True,
