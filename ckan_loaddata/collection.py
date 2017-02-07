@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import io
-import os
-import json
 import tempfile
 import requests
 import pandas as pd
