@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import io
+import logging
 from datetime import datetime
 from ckanapi import RemoteCKAN
 from .collection import Collection
+
+
+logging.basicConfig(format='%(levelname)s: %(asctime)s: %(message)s',
+                    level=logging.DEBUG)
 
 
 class CKAN(object):
@@ -37,7 +42,7 @@ class CKAN(object):
         drop_duplicates = input_params.pop('drop_duplicates', [])
         name_format = output_params.pop('name_format', '')
         data = output_params.pop('metadata', {})
-
+        logging.info('Create resource from url: %s', url)
         if input_format.lower() in self.format_mappings.keys():
             collection = Collection()
             getattr(collection,\
@@ -57,4 +62,9 @@ class CKAN(object):
                 self.format_mappings[output_format]['output_formater'])\
                 (url, **output_params)
             data['upload'] = resource_buffer
-            return self.client.action.resource_create(**data)
+            created = self.client.action.resource_create(**data)
+            logging.info(str(created))
+            logging.info(
+                'Create resource from url:\t%s:\t%s:\t%s',
+                url, self.address, data.get('package_id', ''))
+            return created
