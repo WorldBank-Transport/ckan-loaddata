@@ -2,6 +2,7 @@
 
 import io
 import tempfile
+from datetime import datetime
 import requests
 import pandas as pd
 
@@ -91,8 +92,10 @@ class Collection(object):
         if not kwargs.get('encoding'):
             kwargs['encoding'] = 'UTF-8'
         outfile = tempfile.SpooledTemporaryFile()
-        outfile.name = kwargs.pop('filename', 'filename.csv')
-        outfile.write(self.data_frames[data_frame].to_csv(index=index, **kwargs))
+        outfile.name = datetime.now()\
+            .strftime(kwargs.pop('filename', '')) or data_frame + '.csv'
+        outfile.write(
+            self.data_frames[data_frame].to_csv(index=index, **kwargs))
         outfile.seek(0)
         return outfile
 

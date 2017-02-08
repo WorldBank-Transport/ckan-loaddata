@@ -40,7 +40,6 @@ class CKAN(object):
         rename_columns = input_params.pop('rename_columns', {})
         drop_columns = input_params.pop('drop_columns', [])
         drop_duplicates = input_params.pop('drop_duplicates', [])
-        name_format = output_params.pop('name_format', '')
         data = output_params.pop('metadata', {})
         logging.info('Create resource from url: %s', url)
         if input_format.lower() in self.format_mappings.keys():
@@ -54,9 +53,7 @@ class CKAN(object):
                 collection.drop_duplicates(url, subset=drop_duplicates)
             if drop_columns:
                 collection.drop(url, labels=drop_columns)
-            if name_format:
-                _name = name_format.format(**data)
-                data['name'] = datetime.now().strftime(_name)
+            data['name'] = datetime.now().strftime(data['name'])
             resource_buffer = getattr(
                 collection,
                 self.format_mappings[output_format]['output_formater'])\
