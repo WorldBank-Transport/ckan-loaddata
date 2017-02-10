@@ -8,6 +8,14 @@ Python `Pandas <http://pandas.pydata.org/>`_ and `ckanapi <https://github.com/ck
 Installation
 --------------
 
+Ensure the required system libraries (libxml-dev, libxslt-dev, python-dev)
+are installed, example:- on Ubuntu/Debian based systems
+
+::
+
+   sudo apt-get install libxml2-dev libxslt-dev python-dev
+
+
 Installation is similar to most of other Python packages
 as a global python package or within a virtual enviroment.
 
