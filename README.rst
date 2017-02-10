@@ -181,8 +181,8 @@ arguments
             https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
 
     :metadata:
-        Resource metadata to be posted to CKAN including the
-        target ``package_id``.
+        Resource metadata to be posted to CKAN including
+        target ``package_id`` and resource ``name``.
 
         For more information about acceptable fields can be found in
         CKAN resource creating API documentation
