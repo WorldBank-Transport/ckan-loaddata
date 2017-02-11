@@ -4,6 +4,7 @@ import io
 import logging
 from datetime import datetime
 from ckanapi import RemoteCKAN
+from ckanapi.errors import SearchIndexError
 from .collection import Collection
 
 
@@ -59,7 +60,11 @@ class CKAN(object):
                 self.format_mappings[output_format]['output_formater'])\
                 (url, **output_params)
             data['upload'] = resource_buffer
-            created = self.client.action.resource_create(**data)
+            try:
+                created = self.client.action.resource_create(**data)
+            except SearchIndexError as e:
+                logging.warning(str(e))
+                return
             logging.info(str(created))
             logging.info(
                 'Create resource from url:\t%s:\t%s:\t%s',
